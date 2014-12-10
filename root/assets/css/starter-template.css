@@ -1,0 +1,15 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+}
+#error, #fileRemoval {
+  color: #CC0000;
+}
+#countdown {
+  color: #0000CC;
+}
+.btn {
+  font-size: 18px;
+}
