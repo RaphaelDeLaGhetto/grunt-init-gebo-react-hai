@@ -53,6 +53,7 @@ exports.template = function(grunt, init, done) {
     };
     props.keywords = [];
     props.dependencies = {};
+
     props.devDependencies = {
         "grunt": "~0.4.x",
         "grunt-contrib-clean": "~0.6.x",
@@ -72,12 +73,6 @@ exports.template = function(grunt, init, done) {
         "react": "^0.11.x",
         "react-tools": "^0.11.x"
     };
-    props.jest = {
-        "scriptPreprocessor": "<rootDir>/__tests__/preprocessor.js",
-        "unmockedModulePathPatterns": [
-          "<rootDir>/node_modules/react"
-        ]
-    };
 
     // Files to copy (and process).
     var files = init.filesToCopy(props);
@@ -89,9 +84,17 @@ exports.template = function(grunt, init, done) {
     init.copyAndProcess(files, props, { noProcess: 'assets/images/**' });
 
     // Generate package.json file.
-    init.writePackageJSON('package.json', props);
+    init.writePackageJSON('package.json', props, function(pkg, props) {
+        pkg.jest = {
+            "scriptPreprocessor": "<rootDir>/__tests__/preprocessor.js",
+            "unmockedModulePathPatterns": [
+              "<rootDir>/node_modules/react"
+            ]
+        };
+        return pkg;   
+      });
 
     // All done!
-    done();
+    done();   
   });
 };
