@@ -9,8 +9,6 @@ This software, in conjunction with grunt-init, creates a ready-to-deploy/develop
 
 ### Setup grunt
 
-if you haven't already, that is... Gebo currently depends on grunt@0.4.1. This requires a bit of prep work.
-
 ```
 sudo npm install grunt-cli -g
 sudo npm install grunt-init -g
