@@ -48,7 +48,7 @@ exports.template = function(grunt, init, done) {
     init.prompt('author_url'),
     init.prompt('main', 'index.html')
   ], function(err, props) {
-    props.scripts: {
+    props.scripts = {
         "test": "jest"
     };
     props.keywords = [];
