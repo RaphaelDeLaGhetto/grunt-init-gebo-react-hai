@@ -4,6 +4,7 @@
 var React;
 if (typeof module !== 'undefined') {
     React = require('react');
+    Authenticate = require('./gebo/Authenticate');
 }
 
 /**
@@ -12,18 +13,54 @@ if (typeof module !== 'undefined') {
 var HelloWorld = React.createClass({
 
     /**
+     * componentDidMount
+     */
+    getInitialState: function() {
+        return {
+            friendo: 'world',
+        }
+    },
+
+    /**
+     * componentDidMount
+     */
+    componentDidMount: function() {
+        if (this.props.friendo) {
+          this.setState({
+              friendo: this.props.friendo,
+            });
+        }
+    },
+
+    /**
+     * Called whenever the user's authentication status changes
+     *
+     * @param object
+     */
+    authenticate: function(user) {
+        if (user.verified) {
+          this.setState({
+              friendo: user.name,
+            });
+        }
+        else {
+          this.setState(this.getInitialState());
+        }
+    },
+
+    /**
      * Render the component
      */
     render: function() {
         return(
-            <div className='helloWorld'>
-                <h1>Hello, world!</h1>
+            <div className='helloWorld' ref='helloWorld'>
+                <Authenticate ref='authenticated' update={this.authenticate} />
+                <h1>Hello, {this.state.friendo}!</h1>
             </div>
         );
     }
 });
 
-// For testing
 if (typeof module !== 'undefined') {
   module.exports = HelloWorld;
 }

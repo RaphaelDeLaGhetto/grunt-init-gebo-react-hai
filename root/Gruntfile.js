@@ -28,14 +28,15 @@ module.exports = function(grunt) {
             dist: {
                 //src: ['scripts/**/*.js'],
                 src: [
-                    'scripts/constants.js',
-                    'scripts/estimate.js',
-                    'scripts/getTimeMessage.js',
-                    'scripts/convert.js',
-                    'scripts/Timeout.js',
-                    'scripts/FileSelector.js',
-                    'scripts/FormatSelector.js',
-                    'scripts/ConverterBox.js'
+                    'scripts/config.js',
+                    'scripts/gebo/formatPopupOptions.js',
+                    'scripts/gebo/objectToQueryString.js',
+                    'scripts/gebo/getTokenByPopup.js',
+                    'scripts/gebo/verifyToken.js',
+                    'scripts/gebo/logout.js',
+                    'scripts/gebo/Authenticate.js',
+                    'scripts/gebo/AuthenticateMenu.js',
+                    'scripts/*.js',
                 ],
                 dest: 'dist/<%= pkg.name %>.js'
             }
@@ -61,7 +62,7 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                src: ['index.html', 'robots.txt', 'assets/**/*'],
+                src: ['index.html', 'oauth2callback.html', 'scripts/gebo/Oauth2Callback.js', 'robots.txt', 'assets/**/*'],
                 dest: 'dist/'
             }
         },
