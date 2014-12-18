@@ -34,9 +34,10 @@ module.exports = function(grunt) {
                     'scripts/gebo/getTokenByPopup.js',
                     'scripts/gebo/verifyToken.js',
                     'scripts/gebo/logout.js',
+                    'scripts/gebo/sendFormDataMessage.js',
                     'scripts/gebo/Authenticate.js',
                     'scripts/gebo/AuthenticateMenu.js',
-                    'scripts/*.js',
+//                    'scripts/*.js',
                 ],
                 dest: 'dist/<%= pkg.name %>.js'
             }
@@ -62,9 +63,11 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                src: ['index.html', 'action.html', 'oauth2callback.html', 'scripts/gebo/Oauth2Callback.js', 'robots.txt', 'assets/**/*'],
+                src: ['index.html', 'action.html', 'oauth2callback.html',
+                      'scripts/gebo/Oauth2Callback.js', 'robots.txt', 
+                      'scripts/HelloWorld.js', 'scripts/Interface.js', 'assets/**/*'],
                 dest: 'dist/'
-            }
+            },
         },
         open: {
             server: {
@@ -89,7 +92,7 @@ module.exports = function(grunt) {
             }
         },
         usemin: {
-            html: 'dist/index.html',
+            html: ['dist/index.html', 'dist/action.html'],
             css: ['dist/assets/css/*.css'],
             options: {
                 basedir: 'dist/',  
