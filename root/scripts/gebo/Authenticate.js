@@ -23,10 +23,21 @@ var Authenticate = React.createClass({
      * componentDidMount
      */
     componentDidMount: function() {
-        var update = this.props.update;
-        window.addEventListener('verified', function(event) {
-            update(event.detail);
-        });
+        window.addEventListener('verified', this.update, false);
+    },
+
+    /**
+     * update
+     */
+    update: function(event) {
+        this.props.update(event.detail);
+    },
+
+    /**
+     * componentWillUnmount
+     */
+    componentWillUnmount: function() {
+        window.removeEventListener('verified', this.update, false);
     },
 
     /**
@@ -34,7 +45,7 @@ var Authenticate = React.createClass({
      */
     render: function() {
         return(
-            <div className='authenticate'></div>
+            <div className='authenticate' ref='authenticate'></div>
         );
     }
 });
