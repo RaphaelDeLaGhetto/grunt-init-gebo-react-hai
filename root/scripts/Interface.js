@@ -22,23 +22,11 @@ var Interface = React.createClass({
     },
 
     /**
-     * componentDidMount
-     */
-//    componentDidMount: function() {
-//        if (this.props.friendo) {
-//          this.setState({
-//              friendo: this.props.friendo,
-//            });
-//        }
-//    },
-
-    /**
      * Called whenever the user's authentication status changes
      *
      * @param object
      */
     authenticate: function(user) {
-                    console.log('authenticated', user);
         if (user.verified) {
           this.setState(user);
         }
@@ -54,7 +42,7 @@ var Interface = React.createClass({
         return(
             <div className='interface'>
                 <Authenticate ref='authenticated' update={this.authenticate} />
-                <h1>Client ID: {this.state.email}</h1>
+                <h3>Client ID: {this.state.email}</h3>
             </div>
         );
     }
