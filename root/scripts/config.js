@@ -21,7 +21,7 @@ var gebo = 'https://localhost:3443';
  */
 var menu = {
     authenticated: [
-        { label: 'Action', href: '#' },
+        { label: 'Action', href: '/action.html' },
         { label: 'Logout', href: '#' },
     ],
     anonymous: [
