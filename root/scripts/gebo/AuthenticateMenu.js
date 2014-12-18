@@ -25,6 +25,7 @@ var AuthenticateMenu = React.createClass({
         return {    
             accessToken: localStorage.getItem(name + '-key'),
             name: null,
+            email: null,
             admin: false,
             verified: false,
         };
@@ -55,6 +56,7 @@ var AuthenticateMenu = React.createClass({
                 }
                 else {
                   parent.setState({ name: data.name,
+                                    email: data.email,
                                     admin: data.admin,
                                     verified: true }, parent.dispatchEvent);
                 }
@@ -74,6 +76,7 @@ var AuthenticateMenu = React.createClass({
                       localStorage.setItem(name + '-key', event.data.access_token);
                       parent.setState({ accessToken: event.data.access_token,
                                         name: data.name,
+                                        email: data.email,
                                         admin: data.admin,
                                         verified: true }, parent.dispatchEvent);
                     }

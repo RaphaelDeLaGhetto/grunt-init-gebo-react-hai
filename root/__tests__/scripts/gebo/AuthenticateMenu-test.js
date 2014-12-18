@@ -56,6 +56,7 @@ describe('AuthenticateMenu', function() {
         var authenticate = TestUtils.renderIntoDocument(<AuthenticateMenu />);
         expect(authenticate.state.accessToken).toBe(undefined);
         expect(authenticate.state.name).toBe(null);
+        expect(authenticate.state.email).toBe(null);
         expect(authenticate.state.verified).toBe(false);
     });
 
@@ -70,7 +71,7 @@ describe('AuthenticateMenu', function() {
         localStorage.setItem(haiKeyKey, 'SomePseudoRandomAuthenticationKey');
 
         verifyToken.mockImplementation(function(token, done) {
-            done(null, { name: 'Dan', admin: true });
+            done(null, { name: 'Dan', email: 'daniel@capitolhill.ca', admin: true });
           });
 
         var authenticate = TestUtils.renderIntoDocument(<AuthenticateMenu />);
@@ -97,7 +98,7 @@ describe('AuthenticateMenu', function() {
 
         beforeEach(function() {
             verifyToken.mockImplementation(function(token, done) {
-                done(null, { name: 'Dan', admin: true });
+                done(null, { name: 'Dan', email: 'daniel@capitolhill.ca', admin: true });
               });
         });
 
@@ -122,6 +123,7 @@ describe('AuthenticateMenu', function() {
             var options = TestUtils.scryRenderedDOMComponentsWithTag(authenticate, 'li');
             expect(authenticate.state.accessToken).toEqual('SomePseudoRandomAuthenticationKey');
             expect(authenticate.state.name).toEqual('Dan');
+            expect(authenticate.state.email).toEqual('daniel@capitolhill.ca');
             expect(authenticate.state.admin).toBe(true);
             expect(authenticate.state.verified).toBe(true);
         });
@@ -185,6 +187,7 @@ describe('AuthenticateMenu', function() {
                 window._listeners.message.false[0](event);
  
                 expect(authenticate.state.name).toEqual('Dan');
+                expect(authenticate.state.email).toEqual('daniel@capitolhill.ca');
                 expect(authenticate.state.admin).toBe(true);
                 expect(authenticate.state.verified).toBe(true);
             });
@@ -203,6 +206,7 @@ describe('AuthenticateMenu', function() {
  
                 expect(authenticate.state.accessToken).toBe(undefined);
                 expect(authenticate.state.name).toBe(null);
+                expect(authenticate.state.email).toEqual(null);
                 expect(authenticate.state.admin).toBe(false);
                 expect(authenticate.state.verified).toBe(false);
             });
@@ -240,6 +244,7 @@ describe('AuthenticateMenu', function() {
                         detail: {
                             accessToken: undefined ,
                             name: null,
+                            email: null,
                             admin: false,
                             verified: false,
                         }
@@ -258,6 +263,7 @@ describe('AuthenticateMenu', function() {
                         detail: {
                             accessToken: undefined,
                             name: null,
+                            email: null,
                             admin: false,
                             verified: false,
                         }
@@ -334,6 +340,7 @@ describe('AuthenticateMenu', function() {
             authenticate.reset();
             expect(authenticate.state.accessToken).toBe(undefined);
             expect(authenticate.state.name).toBe(null);
+            expect(authenticate.state.email).toBe(null);
             expect(authenticate.state.verified).toBe(false);
         });
 
