@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                src: ['index.html', 'oauth2callback.html', 'scripts/gebo/Oauth2Callback.js', 'robots.txt', 'assets/**/*'],
+                src: ['index.html', 'action.html', 'oauth2callback.html', 'scripts/gebo/Oauth2Callback.js', 'robots.txt', 'assets/**/*'],
                 dest: 'dist/'
             }
         },
