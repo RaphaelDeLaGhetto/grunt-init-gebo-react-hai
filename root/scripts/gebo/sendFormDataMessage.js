@@ -1,7 +1,7 @@
 // For testing                 
 if (typeof module !== 'undefined') {
   $ = require('jquery');       
-  gebo = require('./config').gebo;
+  gebo = require('../config').gebo;
   FormData = function(form) { 
         var data = form;
         return {
@@ -30,7 +30,7 @@ var sendFormDataMessage = function(form, content, email, action, token, done) {
     var fd = new FormData(form);
     fd.append('sender', email);
     fd.append('performative', 'request');
-    fd.append('action', 'Message');
+    fd.append('action', action);
     fd.append('content', JSON.stringify(content));
     fd.append('access_token', token);
 

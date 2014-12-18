@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 
-jest.dontMock('../../scripts/sendFormDataMessage');
-jest.dontMock('../../scripts/config');
+jest.dontMock('../../../scripts/gebo/sendFormDataMessage');
+jest.dontMock('../../../scripts/config');
 
 var React = require('react/addons'),
     TestUtils = React.addons.TestUtils;
     
-var gebo = require('../../scripts/config').gebo;
+var gebo = require('../../../scripts/config').gebo;
 
 /**
  * Constants
@@ -20,12 +20,12 @@ var EMAIL = 'daniel@capitolhill.ca',
 describe('sendFormDataMessage', function() {
 
     it('should initialize', function() {
-        var sendFormDataMessage = require('../../scripts/sendFormDataMessage');
+        var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
     });
 
     it('should attempt to sendFormDataMessage via a POST request with the correct parameters', function() {
         var $ = require('jquery');
-        var sendFormDataMessage = require('../../scripts/sendFormDataMessage');
+        var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
 
         var callback = jest.genMockFunction();
         var request = sendFormDataMessage(FORM_DATA, CONTENT, EMAIL, ACTION, TOKEN, callback);
@@ -41,7 +41,7 @@ describe('sendFormDataMessage', function() {
 
     it('should call the callback on success', function() {
         var $ = require('jquery');
-        var sendFormDataMessage = require('../../scripts/sendFormDataMessage');
+        var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
 
         var callback = jest.genMockFunction();
         var request = sendFormDataMessage(FORM_DATA, CONTENT, EMAIL, ACTION, TOKEN, callback);
@@ -54,7 +54,7 @@ describe('sendFormDataMessage', function() {
 
     it('should call the callback on error', function() {
         var $ = require('jquery');
-        var sendFormDataMessage = require('../../scripts/sendFormDataMessage');
+        var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
 
         var callback = jest.genMockFunction();
         var request = sendFormDataMessage(FORM_DATA, CONTENT, EMAIL, ACTION, TOKEN, callback);
