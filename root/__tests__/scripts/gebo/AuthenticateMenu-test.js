@@ -222,6 +222,7 @@ describe('AuthenticateMenu', function() {
                         detail: {
                             accessToken: 'SomePseudoRandomAuthenticationKey',
                             name: 'Dan',
+                            email: 'daniel@capitolhill.ca',
                             admin: true,
                             verified: true,
                         }
