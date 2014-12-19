@@ -76,9 +76,8 @@ describe('AuthenticateMenu', function() {
 
         var authenticate = TestUtils.renderIntoDocument(<AuthenticateMenu />);
         var options = TestUtils.scryRenderedDOMComponentsWithTag(authenticate, 'li');
-        expect(options.length).toEqual(2);
-        expect(options[0].getDOMNode().textContent).toEqual('Action');
-        expect(options[1].getDOMNode().textContent).toEqual('Logout');
+        expect(options.length).toEqual(1);
+        expect(options[0].getDOMNode().textContent).toEqual('Logout');
         verifyToken.mockClear();
     });
 
@@ -291,9 +290,8 @@ describe('AuthenticateMenu', function() {
             var authenticate = TestUtils.renderIntoDocument(<AuthenticateMenu />);
             var ul = TestUtils.renderIntoDocument(authenticate.renderMenu());
             var options = TestUtils.scryRenderedDOMComponentsWithTag(ul, 'li');
-            expect(options.length).toEqual(2);
-            expect(options[0].getDOMNode().textContent).toEqual('Action');
-            expect(options[1].getDOMNode().textContent).toEqual('Logout');
+            expect(options.length).toEqual(1);
+            expect(options[0].getDOMNode().textContent).toEqual('Logout');
         });
 
         it('should set an onClick handler if specified in the config file', function() {
