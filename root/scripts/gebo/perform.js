@@ -2,42 +2,45 @@
 if (typeof module !== 'undefined') {
   $ = require('jquery');       
   gebo = require('../config').gebo;
-  FormData = function(form) { 
-        var data = form;
-        return {
-            append: function(key, value) {
-                data[key] = value;  
-            },
-            get: function() {
-                return data;
-            },
-        };
-    };
+  FormData = require('./__mocks__/FormData');
 }
 
 /**
- * A a typeset document to the corpus
+ * Send a request to the gebo. The message can be sent
+ * as FormData or JSON.
  *
- * @param FormData
  * @param object
+ * @param FormData - optional
  * @param function
  */
-var perform = function(form, message, done) {
+var perform = function(message, form, done) {
 
-    var fd = new FormData(form);
+    var data = {};
+    if (typeof form === 'object') {
+      data = new FormData(form);
+    }
+    else {
+      done = form;
+    }
+
     Object.keys(message).forEach(function(key) {
+        var value = message[key];
         if (typeof message[key] === 'object') {
-          fd.append(key, JSON.stringify(message[key]));
+          value = JSON.stringify(value);
+        }
+
+        if (typeof form === 'object') {
+          data.append(key, value);
         }
         else {
-          fd.append(key, message[key]);
+          data[key] = value;
         }
       });
 
     return $.ajax({
         url: gebo + '/perform',
         type: 'POST',
-        data: fd,
+        data: data,
         success: function(data) {
             done();
         },
