@@ -34,7 +34,7 @@ module.exports = function(grunt) {
                     'scripts/gebo/getTokenByPopup.js',
                     'scripts/gebo/verifyToken.js',
                     'scripts/gebo/logout.js',
-                    'scripts/gebo/sendFormDataMessage.js',
+                    'scripts/gebo/perform.js',
                     'scripts/gebo/Authenticate.js',
                     'scripts/gebo/AuthenticateMenu.js',
                     'scripts/*.js',
