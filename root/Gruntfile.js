@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     'scripts/gebo/sendFormDataMessage.js',
                     'scripts/gebo/Authenticate.js',
                     'scripts/gebo/AuthenticateMenu.js',
-//                    'scripts/*.js',
+                    'scripts/*.js',
                 ],
                 dest: 'dist/<%= pkg.name %>.js'
             }
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
             main: {
                 src: ['index.html', 'action.html', 'oauth2callback.html',
                       'scripts/gebo/Oauth2Callback.js', 'robots.txt', 
-                      'scripts/HelloWorld.js', 'scripts/Interface.js', 'assets/**/*'],
+                      'assets/**/*'],
                 dest: 'dist/'
             },
         },

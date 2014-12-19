@@ -35,14 +35,28 @@
         </div>
         <div class="container">
             <div class="starter-template">
-                <div class="row">
-                    <span class="col-md-6">
-                        <img src="assets/images/gebo.jpg" />
-                    </span>
-                    <span class="col-md-6">
-                        <div id="hello">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
+                    <li role="presentation"><a href="#action" role="tab" data-toggle="tab">Action</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <div class="row">
+                            <span class="col-md-6">
+                                <img src="assets/images/gebo.jpg" />
+                            </span>
+                            <span class="col-md-6">
+                                <div id="hello"></div>
+                            </span>
                         </div>
-                    </span>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="action">
+                        <div class="row">
+                            <span class="col-md-12">
+                                <div id="interface"></div>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><!-- /.container -->
@@ -58,8 +72,9 @@
         <script type="text/jsx" src="scripts/gebo/logout.js"></script>
         <script type="text/jsx" src="scripts/gebo/Authenticate.js"></script>
         <script type="text/jsx" src="scripts/gebo/AuthenticateMenu.js"></script>
-        <!-- endbuild -->
         <script type="text/jsx" src="scripts/HelloWorld.js"></script>
+        <script type="text/jsx" src="scripts/Interface.js"></script>
+        <!-- endbuild -->
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
