@@ -20,19 +20,19 @@ if (typeof module !== 'undefined') {
  *
  * @param FormData
  * @param object
- * @param string
- * @param string
- * @param string
  * @param function
  */
-var sendFormDataMessage = function(form, content, email, action, token, done) {
+var sendFormDataMessage = function(form, message, done) {
 
     var fd = new FormData(form);
-    fd.append('sender', email);
-    fd.append('performative', 'request');
-    fd.append('action', action);
-    fd.append('content', JSON.stringify(content));
-    fd.append('access_token', token);
+    Object.keys(message).forEach(function(key) {
+        if (typeof message[key] === 'object') {
+          fd.append(key, JSON.stringify(message[key]));
+        }
+        else {
+          fd.append(key, message[key]);
+        }
+      });
 
     return $.ajax({
         url: gebo + '/perform',

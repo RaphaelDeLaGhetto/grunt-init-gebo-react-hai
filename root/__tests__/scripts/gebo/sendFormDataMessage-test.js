@@ -11,11 +11,14 @@ var gebo = require('../../../scripts/config').gebo;
 /**
  * Constants
  */
-var EMAIL = 'daniel@capitolhill.ca',
-    TOKEN = 'PseudoRandomToken',
-    ACTION = 'ls',
-    CONTENT = {},
-    FORM_DATA = {};
+var FORM_DATA = {},
+    MESSAGE = {
+        sender: 'daniel@capitolhill.ca',
+        performative: 'request',
+        action: 'ls',
+        content: {},
+        access_token: 'PseudoRandomToken',
+    };
 
 describe('sendFormDataMessage', function() {
 
@@ -28,15 +31,15 @@ describe('sendFormDataMessage', function() {
         var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
 
         var callback = jest.genMockFunction();
-        var request = sendFormDataMessage(FORM_DATA, CONTENT, EMAIL, ACTION, TOKEN, callback);
+        var request = sendFormDataMessage(FORM_DATA, MESSAGE, callback);
         expect($.ajax.mock.calls.length).toEqual(1);
         expect($.ajax.mock.calls[0][0].url).toEqual(gebo + '/perform');
         expect($.ajax.mock.calls[0][0].type).toEqual('POST');
-        expect($.ajax.mock.calls[0][0].data.get().sender).toEqual(EMAIL);
-        expect($.ajax.mock.calls[0][0].data.get().performative).toEqual('request');
-        expect($.ajax.mock.calls[0][0].data.get().action).toEqual(ACTION);
-        expect($.ajax.mock.calls[0][0].data.get().content).toEqual(JSON.stringify(CONTENT));
-        expect($.ajax.mock.calls[0][0].data.get().access_token).toEqual(TOKEN);
+        expect($.ajax.mock.calls[0][0].data.get().sender).toEqual(MESSAGE.sender);
+        expect($.ajax.mock.calls[0][0].data.get().performative).toEqual(MESSAGE.performative);
+        expect($.ajax.mock.calls[0][0].data.get().action).toEqual(MESSAGE.action);
+        expect($.ajax.mock.calls[0][0].data.get().content).toEqual(JSON.stringify(MESSAGE.content));
+        expect($.ajax.mock.calls[0][0].data.get().access_token).toEqual(MESSAGE.access_token);
     });
 
     it('should call the callback on success', function() {
@@ -44,7 +47,7 @@ describe('sendFormDataMessage', function() {
         var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
 
         var callback = jest.genMockFunction();
-        var request = sendFormDataMessage(FORM_DATA, CONTENT, EMAIL, ACTION, TOKEN, callback);
+        var request = sendFormDataMessage(FORM_DATA, MESSAGE, callback);
 
         $.ajax.mock.calls[0][0].success();
 
@@ -57,7 +60,7 @@ describe('sendFormDataMessage', function() {
         var sendFormDataMessage = require('../../../scripts/gebo/sendFormDataMessage');
 
         var callback = jest.genMockFunction();
-        var request = sendFormDataMessage(FORM_DATA, CONTENT, EMAIL, ACTION, TOKEN, callback);
+        var request = sendFormDataMessage(FORM_DATA, MESSAGE, callback);
 
         $.ajax.mock.calls[0][0].error(null, null, 'Something weird happened');
 
