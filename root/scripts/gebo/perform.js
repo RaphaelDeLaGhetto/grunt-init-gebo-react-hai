@@ -41,6 +41,8 @@ var perform = function(message, form, done) {
         url: gebo + '/perform',
         type: 'POST',
         data: data,
+        processData: false,
+        contentType: false,
         success: function(data) {
             done();
         },
