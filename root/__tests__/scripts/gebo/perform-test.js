@@ -58,10 +58,11 @@ describe('perform', function() {
         var callback = jest.genMockFunction();
         var request = perform(MESSAGE, FORM_DATA, callback);
 
-        $.ajax.mock.calls[0][0].success();
+        $.ajax.mock.calls[0][0].success({ some: 'data'});
 
         // No error
         expect(callback.mock.calls[0][0]).toBe(undefined);
+        expect(callback.mock.calls[0][1]).toEqual({ some: 'data'});
     });
 
     it('should call the callback on error', function() {
@@ -103,7 +104,7 @@ describe('perform', function() {
         var callback = jest.genMockFunction();
         var request = perform(MESSAGE, callback);
 
-        $.ajax.mock.calls[0][0].success();
+        $.ajax.mock.calls[0][0].success({ some: 'data'});
 
         // No error
         expect(callback.mock.calls[0][0]).toBe(undefined);
@@ -120,7 +121,6 @@ describe('perform', function() {
 
         // Error
         expect(callback.mock.calls[0][0]).toEqual('Something weird happened');
+        expect(callback.mock.calls[0][1]).toEqual({ some: 'data'});
     });
-
-
 });

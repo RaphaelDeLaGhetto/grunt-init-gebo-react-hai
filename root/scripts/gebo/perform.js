@@ -44,7 +44,7 @@ var perform = function(message, form, done) {
         processData: false,
         contentType: false,
         success: function(data) {
-            done();
+            done(null, data);
         },
         error: function(xhr, status, err) {
             done(err);
