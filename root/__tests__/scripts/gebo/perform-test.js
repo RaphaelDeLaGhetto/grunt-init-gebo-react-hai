@@ -61,7 +61,7 @@ describe('perform', function() {
         $.ajax.mock.calls[0][0].success({ some: 'data'});
 
         // No error
-        expect(callback.mock.calls[0][0]).toBe(undefined);
+        expect(callback.mock.calls[0][0]).toBe(null);
         expect(callback.mock.calls[0][1]).toEqual({ some: 'data'});
     });
 
@@ -107,7 +107,8 @@ describe('perform', function() {
         $.ajax.mock.calls[0][0].success({ some: 'data'});
 
         // No error
-        expect(callback.mock.calls[0][0]).toBe(undefined);
+        expect(callback.mock.calls[0][0]).toBe(null);
+        expect(callback.mock.calls[0][1]).toEqual({ some: 'data'});
     });
 
     it('should call the callback on error while processing the JSON message', function() {
@@ -121,6 +122,5 @@ describe('perform', function() {
 
         // Error
         expect(callback.mock.calls[0][0]).toEqual('Something weird happened');
-        expect(callback.mock.calls[0][1]).toEqual({ some: 'data'});
     });
 });
