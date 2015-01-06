@@ -49,6 +49,8 @@ describe('perform', function() {
         expect($.ajax.mock.calls[0][0].data.get().action).toEqual(MESSAGE.action);
         expect($.ajax.mock.calls[0][0].data.get().content).toEqual(JSON.stringify(MESSAGE.content));
         expect($.ajax.mock.calls[0][0].data.get().access_token).toEqual(MESSAGE.access_token);
+        expect($.ajax.mock.calls[0][0].processData).toBe(false);
+        expect($.ajax.mock.calls[0][0].contentType).toBe(false);
     });
 
     it('should call the callback on success', function() {
@@ -95,6 +97,8 @@ describe('perform', function() {
         expect($.ajax.mock.calls[0][0].data.action).toEqual(MESSAGE.action);
         expect($.ajax.mock.calls[0][0].data.content).toEqual(JSON.stringify(MESSAGE.content));
         expect($.ajax.mock.calls[0][0].data.access_token).toEqual(MESSAGE.access_token);
+        expect($.ajax.mock.calls[0][0].processData).toBe(undefined);
+        expect($.ajax.mock.calls[0][0].contentType).toBe(undefined);
     });
 
     it('should call the callback on successfully processing the JSON message', function() {

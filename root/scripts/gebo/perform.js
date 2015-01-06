@@ -15,9 +15,10 @@ if (typeof module !== 'undefined') {
  */
 var perform = function(message, form, done) {
 
-    var data = {};
+    var data = {}, processData, contentType;
     if (typeof form === 'object') {
       data = new FormData(form);
+      processData = contentType = false;
     }
     else {
       done = form;
@@ -41,8 +42,8 @@ var perform = function(message, form, done) {
         url: gebo + '/perform',
         type: 'POST',
         data: data,
-        processData: false,
-        contentType: false,
+        processData: processData,
+        contentType: contentType,
         success: function(data) {
             done(null, data);
         },
