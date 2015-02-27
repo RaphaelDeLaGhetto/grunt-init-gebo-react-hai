@@ -42,6 +42,7 @@ var perform = function(message, form, done) {
               var disposition = this.getResponseHeader('Content-Disposition');
 
               // Get the file name
+              var filename;
               if (disposition && disposition.indexOf('attachment') !== -1) {
                 var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
                 var matches = filenameRegex.exec(disposition);
