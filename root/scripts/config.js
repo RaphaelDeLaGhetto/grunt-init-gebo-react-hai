@@ -15,6 +15,7 @@ var clientId = '{%= name %}@example.com';
  * The agent with which this HAI interacts
  */
 var gebo = 'https://localhost:3443';
+var geboEmail = 'gebo@localhost:3443';
 
 /**
  * Menu options
@@ -48,4 +49,5 @@ if (typeof module !== 'undefined') {
   module.exports.gebo = gebo;
   module.exports.menu = menu;
   module.exports.authPopupOptions = authPopupOptions;
+  module.exports.geboEmail = geboEmail;
 }

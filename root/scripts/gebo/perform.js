@@ -5,6 +5,7 @@ if (typeof module !== 'undefined') {
   FormData = require('./__mocks__/FormData');
   Blob = require('./__mocks__/Blob');
   XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+  geboEmail = require('../config').geboEmail;
 }
 
 /**
@@ -24,6 +25,11 @@ var perform = function(message, form, done) {
     }
     else {
       done = form;
+    }
+
+    // Send receiver, if not set already
+    if (!message.receiver) {
+      message.receiver = geboEmail;
     }
 
     // For downloading a file

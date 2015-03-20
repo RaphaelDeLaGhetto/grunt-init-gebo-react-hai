@@ -9,7 +9,8 @@ var React = require('react/addons'),
     TestUtils = React.addons.TestUtils;
     
 var gebo = require('../../../scripts/config').gebo,
-    FormData = require('../../../scripts/gebo/__mocks__/FormData');
+    FormData = require('../../../scripts/gebo/__mocks__/FormData'),
+    config = require('../../../scripts/config');
 
 /**
  * Constants
@@ -17,6 +18,7 @@ var gebo = require('../../../scripts/config').gebo,
 var FORM_DATA = new FormData({});
     MESSAGE = {
         sender: 'daniel@capitolhill.ca',
+        receiver: config.geboEmail,
         performative: 'request',
         action: 'ls',
         content: {},
@@ -52,6 +54,61 @@ describe('perform', function() {
         var perform = require('../../../scripts/gebo/perform');
     });
 
+    it('should set the receiver if not set in the message', function() {
+        var $ = require('jquery');
+        var perform = require('../../../scripts/gebo/perform');
+        var callback = jest.genMockFunction();
+
+        var message = {
+                sender: 'daniel@capitolhill.ca',
+                performative: 'request',
+                action: 'ls',
+                content: { resource: 'fs' },
+                access_token: 'PseudoRandomToken',
+            };
+
+        var request = perform(message, callback);
+        expect($.ajax.mock.calls.length).toEqual(1);
+        expect($.ajax.mock.calls[0][0].url).toEqual(gebo + '/perform');
+        expect($.ajax.mock.calls[0][0].type).toEqual('POST');
+        expect($.ajax.mock.calls[0][0].data.sender).toEqual(message.sender);
+        expect($.ajax.mock.calls[0][0].data.receiver).toEqual(config.geboEmail);
+        expect($.ajax.mock.calls[0][0].data.performative).toEqual(message.performative);
+        expect($.ajax.mock.calls[0][0].data.action).toEqual(message.action);
+        expect($.ajax.mock.calls[0][0].data.content).toEqual(JSON.stringify(message.content));
+        expect($.ajax.mock.calls[0][0].data.access_token).toEqual(message.access_token);
+        expect($.ajax.mock.calls[0][0].processData).toBe(undefined);
+        expect($.ajax.mock.calls[0][0].contentType).toBe(undefined);
+    });
+
+    it('should not set the receiver if already set in the message', function() {
+        var $ = require('jquery');
+        var perform = require('../../../scripts/gebo/perform');
+        var callback = jest.genMockFunction();
+
+        var message = {
+                sender: 'daniel@capitolhill.ca',
+                receiver: 'gebo@capitolhill.ca',
+                performative: 'request',
+                action: 'ls',
+                content: { resource: 'fs' },
+                access_token: 'PseudoRandomToken',
+            };
+
+        var request = perform(message, callback);
+        expect($.ajax.mock.calls.length).toEqual(1);
+        expect($.ajax.mock.calls[0][0].url).toEqual(gebo + '/perform');
+        expect($.ajax.mock.calls[0][0].type).toEqual('POST');
+        expect($.ajax.mock.calls[0][0].data.sender).toEqual(message.sender);
+        expect($.ajax.mock.calls[0][0].data.receiver).toEqual(message.receiver);
+        expect($.ajax.mock.calls[0][0].data.performative).toEqual(message.performative);
+        expect($.ajax.mock.calls[0][0].data.action).toEqual(message.action);
+        expect($.ajax.mock.calls[0][0].data.content).toEqual(JSON.stringify(message.content));
+        expect($.ajax.mock.calls[0][0].data.access_token).toEqual(message.access_token);
+        expect($.ajax.mock.calls[0][0].processData).toBe(undefined);
+        expect($.ajax.mock.calls[0][0].contentType).toBe(undefined);
+    });
+
     /**
      * Form data
      */
@@ -65,6 +122,7 @@ describe('perform', function() {
         expect($.ajax.mock.calls[0][0].url).toEqual(gebo + '/perform');
         expect($.ajax.mock.calls[0][0].type).toEqual('POST');
         expect($.ajax.mock.calls[0][0].data.get().sender).toEqual(MESSAGE.sender);
+        expect($.ajax.mock.calls[0][0].data.get().receiver).toEqual(MESSAGE.receiver);
         expect($.ajax.mock.calls[0][0].data.get().performative).toEqual(MESSAGE.performative);
         expect($.ajax.mock.calls[0][0].data.get().action).toEqual(MESSAGE.action);
         expect($.ajax.mock.calls[0][0].data.get().content).toEqual(JSON.stringify(MESSAGE.content));
@@ -113,6 +171,7 @@ describe('perform', function() {
         expect($.ajax.mock.calls[0][0].url).toEqual(gebo + '/perform');
         expect($.ajax.mock.calls[0][0].type).toEqual('POST');
         expect($.ajax.mock.calls[0][0].data.sender).toEqual(MESSAGE.sender);
+        expect($.ajax.mock.calls[0][0].data.receiver).toEqual(MESSAGE.receiver);
         expect($.ajax.mock.calls[0][0].data.performative).toEqual(MESSAGE.performative);
         expect($.ajax.mock.calls[0][0].data.action).toEqual(MESSAGE.action);
         expect($.ajax.mock.calls[0][0].data.content).toEqual(JSON.stringify(MESSAGE.content));
